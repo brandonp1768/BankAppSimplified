@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bankappsimplified.LoanController">
+   <children>
+      <TextField fx:id="loanTextField" layoutX="212.0" layoutY="188.0" />
+      <Text layoutX="242.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Loan Amount" textAlignment="CENTER" wrappingWidth="89.47003173828125" />
+      <Button layoutX="212.0" layoutY="261.0" mnemonicParsing="false" onAction="#applyButtonPressed" prefHeight="25.0" prefWidth="149.0" text="Apply" />
+      <Button layoutX="212.0" layoutY="323.0" mnemonicParsing="false" onAction="#backButtonPressed" prefHeight="25.0" prefWidth="149.0" text="Back" />
+   </children>
+</AnchorPane>

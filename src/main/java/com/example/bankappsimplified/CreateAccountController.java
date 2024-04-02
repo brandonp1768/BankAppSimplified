@@ -33,7 +33,7 @@ public class CreateAccountController {
     private Stage stage;
 
     @FXML
-    void createaccountButtonPressed(ActionEvent event) throws IOException { // add the try and catch
+    void createaccountButtonPressed(ActionEvent event) throws IOException {
         try {
             FileReader reader = new FileReader("Accounts.txt");
             BufferedReader bufferedreader = new BufferedReader(reader);
@@ -60,7 +60,7 @@ public class CreateAccountController {
                 boolean found = false;
                 boolean not_found = true;
                 String line;
-                while (not_found) { // Making account numbers unique, may be possible to simply down in future
+                while (not_found) {
                     while ((line = bufferedreader.readLine()) != null) {
                         String[] account_data = line.split(" ");
                         if ((Integer.parseInt(account_data[0]) == account_number)) {
@@ -92,10 +92,8 @@ public class CreateAccountController {
             System.err.println("Exception: " + e);
             creditscoreTextField.setText("Credit Score Is A Number");
         }
-        // continue creating account, now you need to write it to the txt file to finish!
-    } // for this we are using file write, bufferedwriter, i think buffered writer just makes it faster
-    // you are going to be adding in a username portion eventually, or use account number to log in, either way
-    // make something to stop it from leaving the page immedeately so you can show them their account number
+    }
+
 
     @FXML
     void backButtonPressed (ActionEvent event) throws IOException {
@@ -105,7 +103,7 @@ public class CreateAccountController {
     public void changeScene(ActionEvent event, String filename) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(filename)));
         Scene scene = new Scene(root);
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow(); // this is the only part that is weird and I don't understand
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }

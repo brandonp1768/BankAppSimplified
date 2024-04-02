@@ -17,6 +17,7 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+
 public class LoanController {
 
     private Stage stage;
@@ -37,7 +38,7 @@ public class LoanController {
     public void changeScene(ActionEvent event, String filename) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(filename)));
         Scene scene = new Scene(root);
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow(); // this is the only part that is weird and I don't understand
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }

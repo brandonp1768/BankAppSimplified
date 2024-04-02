@@ -38,17 +38,12 @@ public class DashboardController implements Initializable{
 
     private String[] methods = {"Deposit", "Withdrawal"};
 
-    private Account account = new Account(LogInPageController.account.getBalance(), LogInPageController.account.getName(),
-            LogInPageController.account.getAccount_number(), LogInPageController.account.getPassword(),
-            LogInPageController.account.getCreditScore(), LogInPageController.account.getUsername());
+    private Account account = new Account();
 
-    protected static HashMap h = new HashMap(); // should be able to use this in other controllers now
+    protected static HashMap h = new HashMap();
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {  // Put the hashmap code in the LoginPage Initialize
-        welcomeLabel.setText("Welcome " + account.getName());
-        accountnumberLabel.setText("Account Number: " + account.getAccount_number());
-        balanceLabel.setText("Balance: " + account.getBalance());
         methodChoiceBox.getItems().addAll(methods);
         try {
             // try using this like account class is used in LogInPage
@@ -59,12 +54,20 @@ public class DashboardController implements Initializable{
                 String[] account_data = line.split(" ");
                 String[] account_info = {account_data[1], account_data[2], account_data[3], account_data[4], account_data[5]};
                 h.put(account_data[0], account_info);
+                account.setAccount_number(Integer.parseInt(account_data[0]));
+                account.setName(account_data[1]);
+                account.setPassword(account_data[2]);
+                account.setBalance(Double.parseDouble(account_data[3]));
+                account.setCreditScore(Integer.parseInt(account_data[4]));
+                account.setUsername(account_data[5]);
             }
             String[] ai = (String[]) h.get(String.valueOf(account.getAccount_number()));
             for (String i : ai) { // keeping track of things in terminal, can be taken out if wanted
                 System.out.println(i);
             }
-
+            welcomeLabel.setText("Welcome " + account.getName());
+            accountnumberLabel.setText("Account Number: " + account.getAccount_number());
+            balanceLabel.setText("Balance: " + account.getBalance());
         }
         catch (FileNotFoundException e) {
             System.err.println("Exception: " + e);
@@ -75,7 +78,7 @@ public class DashboardController implements Initializable{
 
     @FXML
     void actionButtonPressed (ActionEvent event) throws Exception {
-        try { // try to handle the number format exception and the null pointer exception, mainly number format now
+        try {
             String method = (String) methodChoiceBox.getValue();
             String[] account_data = (String[]) h.get(String.valueOf(account.getAccount_number()));
             double balance = Double.parseDouble(account_data[2]);
@@ -113,7 +116,7 @@ public class DashboardController implements Initializable{
         logout.setContentText("Are You Sure You Want To Log Out?");
         logout.showAndWait();
         if(logout.getResult() == ButtonType.OK){
-            FileWriter fw = new FileWriter ("Accounts.txt"); // see if you can possibly make this more efficient
+            FileWriter fw = new FileWriter ("Accounts.txt");
             BufferedWriter bw = new BufferedWriter(fw);
             for (Object account_number : h.keySet()) {
                 String an = (String) account_number;
@@ -137,8 +140,7 @@ public class DashboardController implements Initializable{
     public void changeScene(ActionEvent event, String filename) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(filename)));
         Scene scene = new Scene(root);
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow(); // this is the only part that is weird and I don't understand
-        stage.setScene(scene);
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.show();
     }
 }

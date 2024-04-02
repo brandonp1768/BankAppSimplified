@@ -52,7 +52,7 @@ public class LogInPageController {
                 }
             }
             if (found) {
-                changeScene(event, "SDashboard.fxml"); // try simplifying this as well eventually
+                changeScene(event, "SDashboard.fxml");
             }
             else {
                 tempTextField.setText("Username Or Password Is Incorrect :( ");
@@ -76,11 +76,11 @@ public class LogInPageController {
         }
     }
 
-    //took this from the original bankapp project, just changes scenes basically
+
     public void changeScene(ActionEvent event, String filename) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(filename)));
         Scene scene = new Scene(root);
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow(); // this is the only part that is weird and I don't understand
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
